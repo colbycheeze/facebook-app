@@ -304,11 +304,12 @@ DEPENDENCIES
   faker
   foundation-rails (= 5.4.5)
   guard-rspec
-  haml-rails (>= 0.3.4)
+  haml-rails
   jbuilder (~> 2.0)
   jquery-rails
   launchy
   letter_opener
+  omniauth
   omniauth-facebook
   pg
   rails (= 4.2.0)

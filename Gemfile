@@ -5,7 +5,7 @@ gem 'rails', '4.2.0'
 # gem 'bootstrap-sass',          '3.2.0.0'
 gem 'foundation-rails', '5.4.5'
 gem 'sass-rails', '~> 4.0.3'
-gem 'haml-rails', '>= 0.3.4'
+gem 'haml-rails'
 gem 'uglifier', ' >= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
@@ -15,6 +15,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'simple_form'
 gem 'annotate', '~> 2.6.5'
 gem 'devise'
+gem 'omniauth'
 gem 'omniauth-facebook'
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -40,6 +41,8 @@ group :production do
   gem 'rails_12factor', '0.0.2'
   gem 'unicorn',        '4.8.3'
 end
+
+ruby '2.2.0'
 
 ##### Setup Quickref
 #
