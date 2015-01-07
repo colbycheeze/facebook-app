@@ -17,6 +17,7 @@ gem 'annotate', '~> 2.6.5'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'figaro'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'pg'
