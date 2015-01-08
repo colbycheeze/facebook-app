@@ -28,16 +28,18 @@ class User < ActiveRecord::Base
 
   has_many :relationships, dependent: :destroy
   has_many :friends, -> { where "status = 'accepted'" }, through: :relationships
-  has_many :sent_requests, -> { where "status = 'sent'" }, through: :relationships
-  has_many :pending_requests, -> { where "status = 'pending'" }, through: :relationships
+  has_many :sent_requests, -> { where "status = 'sent'" }, through: :relationships, foreign_key: "friend_id"
+  has_many :pending_requests, -> { where "status = 'pending'" }, through: :relationships, foreign_key: "friend_id"
 
   def send_request(to_user)
-    relationships.create(friend_id: to_user.id, status: 'sent')
-    to_user.relationships.create(friend_id: id, status: 'pending')
+    return if Relationship.exists?(id: to_user.id)
+    relationships.create!(friend_id: to_user.id, status: 'sent')
+    to_user.relationships.create!(friend_id: id, status: 'pending')
+  end
 
   def accept_request(from_user)
-    relationships.find_by(friend_id: from_user.id).status = 'accepted'
-    from_user.relationships.find_by(friend_id: id).status = 'accepted'
+    relationships.find_by(friend_id: from_user.id).update!(status: 'accepted')
+    from_user.relationships.find_by(friend_id: id).update!(status: 'accepted')
   end
 
   def self.new_with_session(params, session)
