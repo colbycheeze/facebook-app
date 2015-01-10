@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :pending_requests, -> { where "status = 'pending'" }, through: :relationships, foreign_key: "friend_id"
 
   def send_request(to_user)
-    return if Relationship.exists?(id: to_user.id)
+    return if relationships.exists?(friend_id: to_user.id)
     relationships.create!(friend_id: to_user.id, status: 'sent')
     to_user.relationships.create!(friend_id: id, status: 'pending')
   end
