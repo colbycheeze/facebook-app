@@ -17,6 +17,8 @@
 #  uid                    :string
 #  created_at             :datetime
 #  updated_at             :datetime
+#  first_name             :string
+#  last_name              :string
 #
 
 class User < ActiveRecord::Base
@@ -30,6 +32,11 @@ class User < ActiveRecord::Base
   has_many :friends, -> { where "status = 'accepted'" }, through: :relationships
   has_many :sent_requests, -> { where "status = 'sent'" }, through: :relationships, foreign_key: "friend_id"
   has_many :pending_requests, -> { where "status = 'pending'" }, through: :relationships, foreign_key: "friend_id"
+  has_many :posts
+
+  def full_name
+    [first_name, last_name].join(" ")
+  end
 
   def send_request(to_user)
     return if relationships.exists?(friend_id: to_user.id)
@@ -38,7 +45,9 @@ class User < ActiveRecord::Base
   end
 
   def accept_request(from_user)
-    relationships.find_by(friend_id: from_user.id).update!(status: 'accepted')
+    request = relationships.find_by(friend_id: from_user.id)
+    return if request.status != 'pending'
+    request.update!(status: 'accepted')
     from_user.relationships.find_by(friend_id: id).update!(status: 'accepted')
   end
 
@@ -54,7 +63,8 @@ class User < ActiveRecord::Base
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      # user.name = auth.info.name   # assuming the user model has a name
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
       # user.image = auth.info.image # assuming the user model has an image
     end
   end

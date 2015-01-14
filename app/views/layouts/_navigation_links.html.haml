@@ -1,2 +1,4 @@
-%li= button_to 'Log out', destroy_user_session_path, method: :delete, data: {confirm: 'Are you sure?'}
-%li= link_to 'Edit User', edit_user_registration_path
+- if user_signed_in?
+  %li= button_to 'Log out', destroy_user_session_path, method: :delete, data: {confirm: 'Are you sure?'}
+  %li= link_to 'Edit User', edit_user_registration_path
+  %li= "Pending Invites (#{current_user.pending_requests.count})"
