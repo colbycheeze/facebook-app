@@ -1,11 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, :type => :controller do
+
+  before :each do
+    @user = FactoryGirl.create(:user)
+    # @posts = [ FactoryGirl.create(:post, :user => @user) ]
+  end
+
   describe 'GET #index' do
     it "populates a list of users" do
-      user = FactoryGirl(:user)
       get :index
-      expect(assigns(:users)).to eq([user])
+      expect(assigns(:users)).to eq([@user])
     end
 
     it "renders the :index view" do
@@ -16,13 +21,17 @@ RSpec.describe UsersController, :type => :controller do
 
   describe 'GET #show' do
     it "assigns the requested user to @user" do
-      user = Factory(:user)
-      get :show, id: user
-      expect(assigns(:user)).to eq(user)
+      get :show, id: @user
+      expect(assigns(:user)).to eq(@user)
     end
 
+    # it "assigns the users posts to @posts" do
+    #   get :show, id: @user
+    #   expect(assigns(:posts)).to eq(posts)
+    # end
+
     it "renders the :show template" do
-      get :show, id: FactoryGirl(:user)
+      get :show, id: FactoryGirl.create(:user)
       expect(response).to render_template :show
     end
   end

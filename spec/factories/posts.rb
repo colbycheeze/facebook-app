@@ -11,7 +11,8 @@
 
 FactoryGirl.define do
   factory :post do
-    body "MyText"
+    body "Hey let's pass some tests guys!"
+    user
   end
 
 end

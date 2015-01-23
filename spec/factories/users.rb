@@ -24,10 +24,21 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :user do |f|
-    f.email { Faker::Internet.email }
-    f.first_name { Faker::Name.first_name }
-    f.last_name { Faker::Name.last_name }
-    f.password "password"
+  factory :user, aliases: [:author] do
+    email { Faker::Internet.email }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    password "password"
   end
+
+  # factory :user_with_posts do
+
+  #   transient do
+  #     posts_count 5
+  #   end
+
+  #   after(:create) do |user, evaluator|
+  #     create_list(:post, evaluator.posts_count, user: user)
+  #   end
+  # end
 end

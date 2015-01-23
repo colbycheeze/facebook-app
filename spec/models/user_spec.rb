@@ -23,6 +23,8 @@
 
 require 'rails_helper'
 
+# let(:user) { FactoryGirl.build(:user) }
+
 describe User do
   it "has a valid factory" do
     expect(FactoryGirl.create(:user)).to be_valid
