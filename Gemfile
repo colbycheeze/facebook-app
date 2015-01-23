@@ -18,6 +18,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'figaro'
+gem 'faker'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'pg'
@@ -31,7 +32,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'faker'
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'
