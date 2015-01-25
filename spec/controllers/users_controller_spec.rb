@@ -4,7 +4,7 @@ RSpec.describe UsersController, :type => :controller do
 
   before :each do
     @user = FactoryGirl.create(:user)
-    # @posts = [ FactoryGirl.create(:post, :user => @user) ]
+    @posts = [ FactoryGirl.create(:post, :user => @user) ]
   end
 
   describe 'GET #index' do
@@ -25,10 +25,10 @@ RSpec.describe UsersController, :type => :controller do
       expect(assigns(:user)).to eq(@user)
     end
 
-    # it "assigns the users posts to @posts" do
-    #   get :show, id: @user
-    #   expect(assigns(:posts)).to eq(posts)
-    # end
+    it "assigns the users posts to @posts" do
+      get :show, id: @user
+      expect(assigns(:posts)).to eq(@posts)
+    end
 
     it "renders the :show template" do
       get :show, id: FactoryGirl.create(:user)
