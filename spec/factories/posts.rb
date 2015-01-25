@@ -12,7 +12,7 @@
 FactoryGirl.define do
   factory :post do
     body "Hey let's pass some tests guys!"
-    user
+    user :user
   end
 
 end
