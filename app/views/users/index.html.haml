@@ -1,3 +1,7 @@
+%div.pagination
+  = page_entries_info @users
+  = foundation_paginate @users
+
 .row
   - @users.each do |user|
     %p= link_to "#{user.full_name}", user

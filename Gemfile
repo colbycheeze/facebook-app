@@ -19,6 +19,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'faker'
+gem 'will_paginate'
+gem 'foundation-will_paginate'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'pg'
