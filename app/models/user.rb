@@ -51,6 +51,11 @@ class User < ActiveRecord::Base
     from_user.relationships.find_by(friend_id: id).update!(status: 'accepted')
   end
 
+  def relationship?(other_user)
+    # relationships.exists?(other_user)
+    relationships.exists?(friend_id: other_user.id)
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

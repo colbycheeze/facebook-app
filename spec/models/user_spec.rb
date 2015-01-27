@@ -47,6 +47,19 @@ describe User, '#full_name' do
   end
 end
 
+describe User, '#relationship?' do
+  before :each do
+    @user = FactoryGirl.create(:user)
+    @user2 = FactoryGirl.create(:user)
+  end
+
+  it "returns true if users have a relationship" do
+    expect(@user.relationship?(@user2)).to eq false
+    @user.send_request(@user2)
+    expect(@user.relationship?(@user2)).to eq true
+  end
+end
+
 describe User, '#send_request' do
   before :each do
     @user = FactoryGirl.create(:user)

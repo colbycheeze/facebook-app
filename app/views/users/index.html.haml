@@ -1,7 +1,12 @@
+%p= "Showing all users with no relation to #{current_user.full_name}"
+
 %div.pagination
   = page_entries_info @users
   = foundation_paginate @users
 
 .row
   - @users.each do |user|
-    %p= link_to "#{user.full_name}", user
+    - unless current_user.relationship?(user)
+      %div.user
+        %p= link_to "#{user.full_name}", user
+        = render 'add_friend', :user => user
